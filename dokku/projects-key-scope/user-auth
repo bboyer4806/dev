@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# The github-projects key sits in the GitHub secrets of every project repo, so
+# it is held to exactly what their deploy workflow does. Dokku asks this on
+# every command, including the ones it runs internally. Exiting 1 denies.
+# Every other key, and root, is unaffected.
+set -eo pipefail
+[[ $DOKKU_TRACE ]] && set -x
+
+SSH_NAME="$2"
+shift 2
+[[ "$SSH_NAME" == "github-projects" ]] || exit 0
+
+# --app can aim a command at an app this check never sees, and command flags
+# such as git:from-image --build-dir can read files off the server.
+[[ -z "$DOKKU_APP_NAME" ]] || exit 1
+for arg in "$@"; do
+  [[ "$arg" != -* ]] || exit 1
+done
+
+CMD="$1" APP="$2"
+[[ -n "$APP" && "$APP" != "budget" ]] || exit 1
+
+case "$CMD" in
+  apps:exists | apps:create | git:from-image | letsencrypt:active | letsencrypt:enable) ;;
+  # letsencrypt:enable runs these itself while it installs a certificate.
+  certs:add | certs:remove | ports:add) ;;
+  domains:set)
+    shift 2
+    [[ $# -gt 0 ]] || exit 1
+    for domain in "$@"; do
+      [[ "$domain" == *.dev.boyersoftware.com || "$domain" == dev.boyersoftware.com ]] || exit 1
+    done
+    ;;
+  *) exit 1 ;;
+esac

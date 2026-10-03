@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Experiments and proofs of concept from Boyer Software.">
+  <meta name="color-scheme" content="light dark">
+  <title>Boyer Software Dev</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --text: #1c1917;
+      --muted: #57534e;
+      --border: #e7e5e4;
+      --accent: #2563eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0a09;
+        --surface: #1c1917;
+        --text: #f5f5f4;
+        --muted: #a8a29e;
+        --border: #292524;
+        --accent: #60a5fa;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 4rem 1rem;
+    }
+    h1 { margin: 0; font-size: 1.75rem; }
+    header p { margin: 0.25rem 0 2.5rem; color: var(--muted); }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+    a {
+      display: block;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover, a:focus-visible { border-color: var(--accent); }
+    a strong { display: block; }
+    a span { color: var(--muted); font-size: 0.875rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Boyer Software</h1>
+      <p>Experiments and proofs of concept.</p>
+    </header>
+    <!-- One <li> per project. Each lives in its own repo and deploys to <name>.dev.boyersoftware.com. -->
+    <ul>
+      <li>
+        <a href="https://travel.dev.boyersoftware.com">
+          <strong>Travel</strong>
+          <span>travel.dev.boyersoftware.com</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

@@ -1,0 +1,4 @@
+[plugin]
+description = "Confines the github-projects deploy key to the apps under dev.boyersoftware.com"
+version = "1.0.0"
+[plugin.config]
