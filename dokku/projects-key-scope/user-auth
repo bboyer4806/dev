@@ -28,7 +28,12 @@ case "$CMD" in
     shift 2
     [[ $# -gt 0 ]] || exit 1
     for domain in "$@"; do
-      [[ "$domain" == *.dev.boyersoftware.com || "$domain" == dev.boyersoftware.com ]] || exit 1
+      case "$domain" in
+        dev.boyersoftware.com | *.dev.boyersoftware.com) ;;
+        # The live site's domains, for its own app only.
+        guzzlinggoat.com | www.guzzlinggoat.com) [[ "$APP" == guzzlinggoat ]] || exit 1 ;;
+        *) exit 1 ;;
+      esac
     done
     ;;
   *) exit 1 ;;
